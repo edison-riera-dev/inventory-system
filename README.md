@@ -1,8 +1,10 @@
 # 🧾 Inventory System - .NET 8 + Blazor WebAssembly
 
-Sistema de gestión de inventario desarrollado como prueba técnica, aplicando arquitectura en capas, autenticación JWT y frontend con Blazor.
+Sistema de gestión de inventario desarrollado como prueba técnica, aplicando arquitectura en capas, autenticación JWT y frontend  con Blazor.
+
 
 ---
+
 
 ## 🚀 Tecnologías utilizadas
 
