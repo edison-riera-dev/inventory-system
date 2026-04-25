@@ -1,143 +1,90 @@
-# Inventory Management System
+# 🧾 Inventory System - .NET 8 + Blazor WebAssembly
 
-## 🚀 Overview
+Sistema de gestión de inventario desarrollado como prueba técnica, aplicando arquitectura en capas, autenticación JWT y frontend con Blazor.
 
-Inventory management system built with:
+---
 
+## 🚀 Tecnologías utilizadas
+
+* .NET 8
 * ASP.NET Core Web API
+* Entity Framework Core
+* SQLite
 * Blazor WebAssembly
-* Entity Framework Core (SQLite)
-* ASP.NET Core Identity + JWT Authentication
-* Clean Architecture
-
-The system allows managing products and tracking stock movements (inbound/outbound).
+* JWT Authentication
+* Clean Architecture (Domain / Application / Infrastructure / API)
 
 ---
 
-## 🧱 Architecture
+## 🔐 Funcionalidades principales
 
-The solution follows Clean Architecture:
-
-* **Domain** → Entities and business rules
-* **Application** → DTOs and interfaces
-* **Infrastructure** → EF Core, database, services
-* **API** → Controllers, authentication, endpoints
-* **Client** → Blazor WebAssembly UI
-
----
-
-## ⚙️ Prerequisites
-
-* .NET 8 SDK
-* Git
+* ✔ Autenticación con JWT
+* ✔ CRUD de productos
+* ✔ Control de inventario (Entradas / Salidas)
+* ✔ Validación de stock
+* ✔ Historial de movimientos por producto
+* ✔ Interfaz web con Blazor
+* ✔ Manejo de errores
 
 ---
 
-## ▶️ How to Run
+## 🏗️ Arquitectura
 
-### 1. Clone repository
+El proyecto está organizado siguiendo principios de Clean Architecture:
 
-```bash
-git clone <REPO_URL>
-cd InventorySystem
-```
-
----
-
-### 2. Restore packages
-
-```bash
-dotnet restore
-```
+* **Domain** → Entidades del negocio
+* **Application** → Interfaces, DTOs y lógica de negocio
+* **Infrastructure** → Acceso a datos (EF Core)
+* **API** → Endpoints REST
+* **Client (Blazor)** → Interfaz de usuario
 
 ---
 
-### 3. Apply database migrations
+## ▶️ Ejecución del proyecto
 
-```bash
-dotnet ef database update --project InventorySystem.Infrastructure --startup-project InventorySystem.Api
-```
+### 1. Clonar repositorio
 
----
+git clone https://github.com/edison-riera-dev/inventory-system.git
 
-### 4. Run API
+### 2. Ejecutar Backend
 
-```bash
-dotnet run --project InventorySystem.Api
-```
+cd InventorySystem.Api
+dotnet run
 
-Swagger will be available at:
-
-```
+Swagger:
 http://localhost:5282/swagger
-```
+
+### 3. Ejecutar Frontend
+
+cd InventorySystem.Client
+dotnet run
+
+Aplicación:
+http://localhost:5228
 
 ---
 
-### 5. Run Blazor Client
+## 🔑 Credenciales de prueba
 
-```bash
-dotnet run --project InventorySystem.Client
-```
-
----
-
-## 🔐 Authentication
-
-Use the following credentials:
-
-```text
 Email: admin@demo.com
 Password: Admin123*
-```
 
 ---
 
-## 📦 API Endpoints
+---
 
-### Products
+## ⚠️ Consideraciones técnicas
 
-* GET `/api/products`
-* GET `/api/products/{id}`
-* POST `/api/products`
-* PUT `/api/products/{id}`
-* DELETE `/api/products/{id}`
-
-### Stock Movements
-
-* GET `/api/products/{id}/movements`
-* POST `/api/products/{id}/movements`
+* Uso de JWT para autenticación segura
+* Validación de stock en movimientos tipo OUT
+* Separación de responsabilidades por capas
+* Uso de DTOs para desacoplar entidades
+* Base de datos SQLite para facilidad de ejecución
 
 ---
 
-## 🧠 Business Logic
+## 👨‍💻 Autor
 
-* Prevents negative stock
-* Tracks all stock movements
-* Supports inbound and outbound operations
-* Ensures SKU uniqueness
-
----
-
-## 🔒 Security
-
-* JWT-based authentication
-* Protected endpoints using `[Authorize]`
-
----
-
-## 🧪 Testing
-
-```bash
-dotnet test
-```
-
----
-
-## 📝 Notes
-
-* Database is SQLite for simplicity
-* Migrations are included
-* Designed to run in under 10 minutes after cloning
+**Edison Riera**
 
 ---
