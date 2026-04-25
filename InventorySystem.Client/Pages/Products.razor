@@ -1,0 +1,48 @@
+@page "/products"
+@attribute [Authorize]
+@using Microsoft.AspNetCore.Authorization
+@using InventorySystem.Client.Models
+@using InventorySystem.Client.Components.Products
+@inject InventorySystem.Client.Services.ProductApiService ProductService
+
+<h3>Productos</h3>
+
+<a class="btn btn-primary mb-3" href="/products/new">Nuevo producto</a>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+<ProductTable Products="products"
+              LowStockThreshold="lowStockThreshold"
+              OnDelete="DeleteProduct" />
+
+@code {
+    private List<ProductDto> products = new();
+    private int lowStockThreshold = 10;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProducts();
+    }
+
+    private async Task LoadProducts()
+    {
+        products = await ProductService.GetProducts();
+    }
+
+    private async Task DeleteProduct(int id)
+    {
+        try
+        {
+            await ProductService.DeleteProduct(id);
+            await LoadProducts();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+}

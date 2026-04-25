@@ -1,0 +1,53 @@
+@page "/login"
+@using InventorySystem.Client.Models
+@inject InventorySystem.Client.Services.AuthService AuthService
+@inject NavigationManager Navigation
+
+<div class="login-wrapper">
+    <div class="login-card">
+        <h2>Inventory System</h2>
+        <p class="subtitle">Acceso al sistema de inventario</p>
+
+        @if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            <div class="alert alert-danger">@errorMessage</div>
+        }
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input class="form-control" @bind="model.Email" placeholder="admin@demo.com" />
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" class="form-control" @bind="model.Password" placeholder="********" />
+        </div>
+
+        <button class="btn btn-primary w-100" @onclick="LoginUser">
+            Ingresar
+        </button>
+    </div>
+</div>
+
+@code {
+    private LoginRequest model = new()
+    {
+        Email = "admin@demo.com",
+        Password = "Admin123*"
+    };
+
+    private string? errorMessage;
+
+    private async Task LoginUser()
+    {
+        try
+        {
+            await AuthService.Login(model);
+            Navigation.NavigateTo("/products");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+}

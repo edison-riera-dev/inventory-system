@@ -1,0 +1,14 @@
+@inject InventorySystem.Client.Services.AuthService AuthService
+@inject NavigationManager Navigation
+
+<button class="btn btn-danger w-100" @onclick="Logout">
+    🚪 Cerrar sesión
+</button>
+
+@code {
+    private async Task Logout()
+    {
+        await AuthService.Logout();
+        Navigation.NavigateTo("/login", true);
+    }
+}

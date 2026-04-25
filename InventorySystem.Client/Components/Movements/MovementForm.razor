@@ -1,0 +1,33 @@
+@using InventorySystem.Client.Models
+
+<h5>Registrar movimiento</h5>
+
+<div class="mb-3">
+    <label>Tipo</label>
+    <select class="form-control" @bind="Model.Type">
+        <option value="1">Entrada</option>
+        <option value="2">Salida</option>
+    </select>
+</div>
+
+<div class="mb-3">
+    <label>Cantidad</label>
+    <InputNumber class="form-control" @bind-Value="Model.Quantity" />
+</div>
+
+<div class="mb-3">
+    <label>Motivo</label>
+    <InputText class="form-control" @bind-Value="Model.Reason" />
+</div>
+
+<button class="btn btn-success" @onclick="Submit">Registrar</button>
+
+@code {
+    [Parameter] public CreateStockMovementDto Model { get; set; } = new();
+    [Parameter] public EventCallback<CreateStockMovementDto> OnSave { get; set; }
+
+    private async Task Submit()
+    {
+        await OnSave.InvokeAsync(Model);
+    }
+}

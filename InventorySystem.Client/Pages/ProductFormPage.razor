@@ -1,0 +1,77 @@
+@page "/products/new"
+@page "/products/edit/{Id:int}"
+@attribute [Authorize]
+@using Microsoft.AspNetCore.Authorization
+@using InventorySystem.Client.Models
+@using InventorySystem.Client.Components.Products
+@inject InventorySystem.Client.Services.ProductApiService ProductService
+@inject NavigationManager Navigation
+
+<h3>@(IsEditMode ? "Editar producto" : "Nuevo producto")</h3>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+<ProductForm Model="model"
+             ShowInitialStock="!IsEditMode"
+             OnSave="SaveProduct" />
+
+@code {
+    [Parameter] public int? Id { get; set; }
+
+    private CreateProductDto model = new();
+    private string? errorMessage;
+
+    private bool IsEditMode => Id.HasValue;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (IsEditMode)
+        {
+            var product = await ProductService.GetProductById(Id!.Value);
+
+            if (product is not null)
+            {
+                model = new CreateProductDto
+                {
+                    Name = product.Name,
+                    SKU = product.SKU,
+                    Category = product.Category,
+                    QuantityInStock = product.QuantityInStock,
+                    UnitPrice = product.UnitPrice
+                };
+            }
+        }
+    }
+
+    private async Task SaveProduct(CreateProductDto dto)
+    {
+        try
+        {
+            if (IsEditMode)
+            {
+                var updateDto = new UpdateProductDto
+                {
+                    Name = dto.Name,
+                    SKU = dto.SKU,
+                    Category = dto.Category,
+                    UnitPrice = dto.UnitPrice
+                };
+
+                await ProductService.UpdateProduct(Id!.Value, updateDto);
+            }
+            else
+            {
+                await ProductService.CreateProduct(dto);
+            }
+
+            Navigation.NavigateTo("/products");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+}

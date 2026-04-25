@@ -1,0 +1,27 @@
+@using InventorySystem.Client.Models
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Motivo</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movement in Movements)
+        {
+            <tr>
+                <td>@(movement.Type == 1 ? "Entrada" : "Salida")</td>
+                <td>@movement.Quantity</td>
+                <td>@movement.Reason</td>
+                <td>@movement.Timestamp.ToLocalTime()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter] public List<StockMovementDto> Movements { get; set; } = new();
+}

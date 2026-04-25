@@ -1,0 +1,46 @@
+@using InventorySystem.Client.Models
+
+<EditForm Model="Model" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+
+    <div class="mb-3">
+        <label>Nombre</label>
+        <InputText class="form-control" @bind-Value="Model.Name" />
+    </div>
+
+    <div class="mb-3">
+        <label>SKU</label>
+        <InputText class="form-control" @bind-Value="Model.SKU" />
+    </div>
+
+    <div class="mb-3">
+        <label>Categoría</label>
+        <InputText class="form-control" @bind-Value="Model.Category" />
+    </div>
+
+    @if (ShowInitialStock)
+    {
+        <div class="mb-3">
+            <label>Stock inicial</label>
+            <InputNumber class="form-control" @bind-Value="Model.QuantityInStock" />
+        </div>
+    }
+
+    <div class="mb-3">
+        <label>Precio unitario</label>
+        <InputNumber class="form-control" @bind-Value="Model.UnitPrice" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Guardar</button>
+</EditForm>
+
+@code {
+    [Parameter] public CreateProductDto Model { get; set; } = new();
+    [Parameter] public bool ShowInitialStock { get; set; } = true;
+    [Parameter] public EventCallback<CreateProductDto> OnSave { get; set; }
+
+    private async Task Submit()
+    {
+        await OnSave.InvokeAsync(Model);
+    }
+}

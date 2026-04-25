@@ -1,0 +1,28 @@
+@using InventorySystem.Client.Models
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>SKU</th>
+            <th>Categoría</th>
+            <th>Stock</th>
+            <th>Precio</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Products)
+        {
+            <ProductRow Product="product"
+                        LowStockThreshold="LowStockThreshold"
+                        OnDelete="OnDelete" />
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter] public List<ProductDto> Products { get; set; } = new();
+    [Parameter] public int LowStockThreshold { get; set; } = 10;
+    [Parameter] public EventCallback<int> OnDelete { get; set; }
+}

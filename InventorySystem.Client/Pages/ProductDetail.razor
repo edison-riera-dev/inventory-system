@@ -1,0 +1,70 @@
+@page "/products/{Id:int}"
+@attribute [Authorize]
+@using Microsoft.AspNetCore.Authorization
+@using InventorySystem.Client.Models
+@using InventorySystem.Client.Components.Movements
+@inject InventorySystem.Client.Services.ProductApiService ProductService
+
+<h3>Detalle del producto</h3>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+@if (product is null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <div class="card p-3 mb-3">
+        <h4>@product.Name</h4>
+        <p><strong>SKU:</strong> @product.SKU</p>
+        <p><strong>Categoría:</strong> @product.Category</p>
+        <p><strong>Stock:</strong> @product.QuantityInStock</p>
+        <p><strong>Precio:</strong> @product.UnitPrice.ToString("C")</p>
+    </div>
+
+    <MovementForm Model="newMovement" OnSave="RegisterMovement" />
+
+    <hr />
+
+    <h5>Historial de movimientos</h5>
+
+    <MovementTable Movements="movements" />
+}
+
+@code {
+    [Parameter] public int Id { get; set; }
+
+    private ProductDto? product;
+    private List<StockMovementDto> movements = new();
+    private CreateStockMovementDto newMovement = new();
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        product = await ProductService.GetProductById(Id);
+        movements = await ProductService.GetMovements(Id);
+    }
+
+    private async Task RegisterMovement(CreateStockMovementDto dto)
+    {
+        try
+        {
+            await ProductService.CreateMovement(Id, dto);
+            newMovement = new CreateStockMovementDto();
+            await LoadData();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+}
