@@ -15,13 +15,18 @@ public class ProductService : IProductService
         this.db = db;
     }
 
-    public async Task<List<ProductDto>> GetAllAsync(string? category)
+    public async Task<List<ProductDto>> GetAllAsync(string? category, int? lowStockThreshold)
     {
         var query = db.Products.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(category))
         {
             query = query.Where(p => p.Category == category);
+        }
+
+        if (lowStockThreshold.HasValue)
+        {
+            query = query.Where(p => p.QuantityInStock < lowStockThreshold.Value);
         }
 
         return await query
@@ -58,16 +63,25 @@ public class ProductService : IProductService
 
     public async Task<ProductDto> CreateAsync(ProductDto productDto)
     {
-        var skuExists = await db.Products.AnyAsync(p => p.SKU == productDto.SKU);
+        if (string.IsNullOrWhiteSpace(productDto.Name))
+            throw new Exception("El nombre del producto es requerido.");
 
-        if (skuExists)
-            throw new Exception("El SKU ya existe.");
+        if (string.IsNullOrWhiteSpace(productDto.SKU))
+            throw new Exception("El SKU es requerido.");
+
+        if (string.IsNullOrWhiteSpace(productDto.Category))
+            throw new Exception("La categoría es requerida.");
 
         if (productDto.QuantityInStock < 0)
             throw new Exception("El stock inicial no puede ser negativo.");
 
         if (productDto.UnitPrice <= 0)
             throw new Exception("El precio debe ser mayor a cero.");
+
+        var skuExists = await db.Products.AnyAsync(p => p.SKU == productDto.SKU);
+
+        if (skuExists)
+            throw new Exception("El SKU ya existe.");
 
         var product = new Product
         {
@@ -95,14 +109,23 @@ public class ProductService : IProductService
         if (product is null)
             return false;
 
+        if (string.IsNullOrWhiteSpace(productDto.Name))
+            throw new Exception("El nombre del producto es requerido.");
+
+        if (string.IsNullOrWhiteSpace(productDto.SKU))
+            throw new Exception("El SKU es requerido.");
+
+        if (string.IsNullOrWhiteSpace(productDto.Category))
+            throw new Exception("La categoría es requerida.");
+
+        if (productDto.UnitPrice <= 0)
+            throw new Exception("El precio debe ser mayor a cero.");
+
         var skuExists = await db.Products
             .AnyAsync(p => p.SKU == productDto.SKU && p.Id != id);
 
         if (skuExists)
             throw new Exception("El SKU ya existe.");
-
-        if (productDto.UnitPrice <= 0)
-            throw new Exception("El precio debe ser mayor a cero.");
 
         product.Name = productDto.Name;
         product.SKU = productDto.SKU;

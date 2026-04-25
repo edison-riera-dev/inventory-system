@@ -1,5 +1,5 @@
-using InventorySystem.Client.Models;
 using System.Net.Http.Json;
+using InventorySystem.Client.Models;
 
 namespace InventorySystem.Client.Services;
 
@@ -14,8 +14,6 @@ public class ProductApiService
 
     public async Task<List<ProductDto>> GetProducts(string? category = null, int? lowStockThreshold = null)
     {
-        var url = "api/products";
-
         var query = new List<string>();
 
         if (!string.IsNullOrWhiteSpace(category))
@@ -23,6 +21,8 @@ public class ProductApiService
 
         if (lowStockThreshold.HasValue)
             query.Add($"lowStockThreshold={lowStockThreshold.Value}");
+
+        var url = "api/products";
 
         if (query.Any())
             url += "?" + string.Join("&", query);

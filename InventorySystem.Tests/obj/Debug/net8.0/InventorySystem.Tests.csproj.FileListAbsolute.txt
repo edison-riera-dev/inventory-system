@@ -107,3 +107,4 @@ C:\PROYECTO_TEST\InventorySystem\InventorySystem.Tests\obj\Debug\net8.0\refint\I
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Tests\obj\Debug\net8.0\InventorySystem.Tests.pdb
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Tests\obj\Debug\net8.0\InventorySystem.Tests.genruntimeconfig.cache
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Tests\obj\Debug\net8.0\ref\InventorySystem.Tests.dll
+C:\PROYECTO_TEST\InventorySystem\InventorySystem.Tests\obj\Debug\net8.0\InventorySystem.Tests.sourcelink.json

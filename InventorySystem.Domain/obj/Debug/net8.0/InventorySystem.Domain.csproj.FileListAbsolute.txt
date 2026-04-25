@@ -9,3 +9,4 @@ C:\PROYECTO_TEST\InventorySystem\InventorySystem.Domain\obj\Debug\net8.0\Invento
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Domain\obj\Debug\net8.0\refint\InventorySystem.Domain.dll
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Domain\obj\Debug\net8.0\InventorySystem.Domain.pdb
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Domain\obj\Debug\net8.0\ref\InventorySystem.Domain.dll
+C:\PROYECTO_TEST\InventorySystem\InventorySystem.Domain\obj\Debug\net8.0\InventorySystem.Domain.sourcelink.json

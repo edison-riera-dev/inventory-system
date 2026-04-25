@@ -18,16 +18,31 @@ public class AppDbContext : IdentityDbContext
         base.OnModelCreating(builder);
 
         builder.Entity<Product>()
-            .HasIndex(x => x.SKU)
+            .HasIndex(p => p.SKU)
             .IsUnique();
 
         builder.Entity<Product>()
-            .Property(x => x.UnitPrice)
+            .Property(p => p.Name)
+            .IsRequired()
+            .HasMaxLength(150);
+
+        builder.Entity<Product>()
+            .Property(p => p.SKU)
+            .IsRequired()
+            .HasMaxLength(80);
+
+        builder.Entity<Product>()
+            .Property(p => p.Category)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Entity<Product>()
+            .Property(p => p.UnitPrice)
             .HasPrecision(18, 2);
 
         builder.Entity<StockMovement>()
-            .HasOne(x => x.Product)
-            .WithMany(x => x.StockMovements)
-            .HasForeignKey(x => x.ProductId);
+            .HasOne(m => m.Product)
+            .WithMany(p => p.StockMovements)
+            .HasForeignKey(m => m.ProductId);
     }
 }

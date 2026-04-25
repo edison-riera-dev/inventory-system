@@ -1,12 +1,19 @@
 @using InventorySystem.Client.Models
 
-<tr class="@(Product.QuantityInStock < LowStockThreshold ? "table-warning" : "")">
+<tr class="@(Product.QuantityInStock < LowStockThreshold ? "table-danger" : "")">
     <td>
         <a href="/products/@Product.Id">@Product.Name</a>
     </td>
     <td>@Product.SKU</td>
     <td>@Product.Category</td>
-    <td>@Product.QuantityInStock</td>
+    <td>
+        @Product.QuantityInStock
+
+        @if (Product.QuantityInStock < LowStockThreshold)
+        {
+            <span class="badge bg-danger ms-2">Stock bajo</span>
+        }
+    </td>
     <td>@Product.UnitPrice.ToString("C")</td>
     <td>
         <a class="btn btn-sm btn-secondary" href="/products/edit/@Product.Id">Editar</a>

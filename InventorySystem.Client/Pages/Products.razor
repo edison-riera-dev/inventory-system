@@ -7,20 +7,59 @@
 
 <h3>Productos</h3>
 
-<a class="btn btn-primary mb-3" href="/products/new">Nuevo producto</a>
+<div class="mb-3">
+    <a class="btn btn-primary" href="/products/new">Nuevo producto</a>
+</div>
+
+<div class="card p-3 mb-3">
+    <h5>Filtros</h5>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label>Categoría</label>
+            <input class="form-control" @bind="category" placeholder="Ej: Tecnologia" />
+        </div>
+
+        <div class="col-md-4">
+            <label>Filtrar stock menor a</label>
+            <input type="number" class="form-control" @bind="lowStockThreshold" placeholder="Ej: 10" />
+        </div>
+
+        <div class="col-md-4 d-flex align-items-end">
+            <button class="btn btn-secondary me-2" @onclick="LoadProducts">
+                Buscar
+            </button>
+
+            <button class="btn btn-outline-secondary" @onclick="ClearFilters">
+                Limpiar
+            </button>
+        </div>
+    </div>
+</div>
 
 @if (!string.IsNullOrWhiteSpace(errorMessage))
 {
     <div class="alert alert-danger">@errorMessage</div>
 }
 
-<ProductTable Products="products"
-              LowStockThreshold="lowStockThreshold"
-              OnDelete="DeleteProduct" />
+@if (products.Count == 0)
+{
+    <p>No existen productos registrados.</p>
+}
+else
+{
+    <ProductTable Products="products"
+                  LowStockThreshold="HighlightLowStockThreshold"
+                  OnDelete="DeleteProduct" />
+}
 
 @code {
     private List<ProductDto> products = new();
-    private int lowStockThreshold = 10;
+
+    private const int HighlightLowStockThreshold = 10;
+
+    private string? category;
+    private int? lowStockThreshold;
     private string? errorMessage;
 
     protected override async Task OnInitializedAsync()
@@ -30,7 +69,23 @@
 
     private async Task LoadProducts()
     {
-        products = await ProductService.GetProducts();
+        try
+        {
+            products = await ProductService.GetProducts(category, lowStockThreshold);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+    private async Task ClearFilters()
+    {
+        category = null;
+        lowStockThreshold = null;
+        errorMessage = null;
+
+        await LoadProducts();
     }
 
     private async Task DeleteProduct(int id)

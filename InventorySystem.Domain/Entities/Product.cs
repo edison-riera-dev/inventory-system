@@ -10,7 +10,7 @@ public class Product
 
     public string Category { get; set; } = string.Empty;
 
-    public int QuantityInStock { get; set; }  // 👈 ESTA ES LA CLAVE
+    public int QuantityInStock { get; set; }
 
     public decimal UnitPrice { get; set; }
 

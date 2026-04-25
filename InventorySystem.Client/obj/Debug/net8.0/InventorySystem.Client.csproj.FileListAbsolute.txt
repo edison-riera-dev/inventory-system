@@ -1068,6 +1068,7 @@ C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\Invento
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\refint\InventorySystem.Client.dll
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\InventorySystem.Client.pdb
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\ref\InventorySystem.Client.dll
-C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\compressed\g2swwpc25j-{0}-h1nytkvl2k-h1nytkvl2k.gz
-C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\compressed\utgtz5lnx2-{0}-7drh1p0mbt-7drh1p0mbt.gz
-C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\compressed\59xd34x24d-{0}-rz7u0c4gw9-rz7u0c4gw9.gz
+C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\InventorySystem.Client.sourcelink.json
+C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\compressed\g2swwpc25j-{0}-n1gcp6kwdk-n1gcp6kwdk.gz
+C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\compressed\utgtz5lnx2-{0}-ebti1pjln7-ebti1pjln7.gz
+C:\PROYECTO_TEST\InventorySystem\InventorySystem.Client\obj\Debug\net8.0\compressed\59xd34x24d-{0}-5gtblywl69-5gtblywl69.gz

@@ -85,3 +85,4 @@ C:\PROYECTO_TEST\InventorySystem\InventorySystem.Api\obj\Debug\net8.0\refint\Inv
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Api\obj\Debug\net8.0\InventorySystem.Api.pdb
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Api\obj\Debug\net8.0\InventorySystem.Api.genruntimeconfig.cache
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Api\obj\Debug\net8.0\ref\InventorySystem.Api.dll
+C:\PROYECTO_TEST\InventorySystem\InventorySystem.Api\obj\Debug\net8.0\InventorySystem.Api.sourcelink.json

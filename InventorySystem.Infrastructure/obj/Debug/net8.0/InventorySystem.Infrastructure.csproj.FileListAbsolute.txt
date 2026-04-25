@@ -17,3 +17,4 @@ C:\PROYECTO_TEST\InventorySystem\InventorySystem.Infrastructure\obj\Debug\net8.0
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Infrastructure\obj\Debug\net8.0\InventorySystem.Infrastructure.pdb
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Infrastructure\obj\Debug\net8.0\InventorySystem.Infrastructure.genruntimeconfig.cache
 C:\PROYECTO_TEST\InventorySystem\InventorySystem.Infrastructure\obj\Debug\net8.0\ref\InventorySystem.Infrastructure.dll
+C:\PROYECTO_TEST\InventorySystem\InventorySystem.Infrastructure\obj\Debug\net8.0\InventorySystem.Infrastructure.sourcelink.json
