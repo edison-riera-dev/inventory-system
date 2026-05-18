@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-
+    restart: always
     container_name: inventory-api
 
     depends_on:
