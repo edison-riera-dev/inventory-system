@@ -11,16 +11,16 @@ public static class IdentitySeeder
 
         var user = await userManager.FindByEmailAsync(email);
 
-        if (user is null)
-        {
-            user = new IdentityUser
-            {
-                UserName = email,
-                Email = email,
-                EmailConfirmed = true
-            };
+        if (user != null)
+            return;
 
-            await userManager.CreateAsync(user, password);
-        }
+        var adminUser = new IdentityUser
+        {
+            UserName = email,
+            Email = email,
+            EmailConfirmed = true
+        };
+
+        await userManager.CreateAsync(adminUser, password);
     }
 }

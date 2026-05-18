@@ -1,8 +1,51 @@
+# Build
 bin/
 obj/
+
+# Visual Studio
 .vs/
 *.user
+*.suo
+
+# Rider
+.idea/
+
+# Logs
 *.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SQLite
 *.db
+*.db-shm
+*.db-wal
+
+# Docker
+docker-data/
+
+# Node
 node_modules/
-dist/
+
+# Publish
+publish/
+
+# Blazor generated
+wwwroot/_framework/
+
+# Test Results
+TestResults/
+
+# NuGet
+*.nupkg
+
+# Environment files
+.env
+
+# Coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
